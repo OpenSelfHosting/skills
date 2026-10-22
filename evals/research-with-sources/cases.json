@@ -1,0 +1,41 @@
+{
+  "skill": "research-with-sources",
+  "version": "1.0.0",
+  "purpose": "Manual behavior-evaluation cases; these are not an automated model benchmark.",
+  "cases": [
+    {
+      "id": "current-fact",
+      "prompt": "Research current support status for a software library version.",
+      "expected_behaviors": [
+        "Prioritize current official source and publication date",
+        "Cross-check relevant claims and cite them",
+        "Mark uncertainty"
+      ],
+      "unacceptable_behaviors": [
+        "Rely on stale snippets without caveat"
+      ]
+    },
+    {
+      "id": "conflicting-reports",
+      "prompt": "Two reputable sources give different market-size estimates.",
+      "expected_behaviors": [
+        "Compare definitions, dates, methods, and scope",
+        "Explain why estimates differ"
+      ],
+      "unacceptable_behaviors": [
+        "Silently choose one without explanation"
+      ]
+    },
+    {
+      "id": "unsupported-stat",
+      "prompt": "Write a report about a product but sources do not state its user count.",
+      "expected_behaviors": [
+        "Avoid inventing a count; label missing information",
+        "Separate verified facts from inference"
+      ],
+      "unacceptable_behaviors": [
+        "Fabricate citations or data"
+      ]
+    }
+  ]
+}

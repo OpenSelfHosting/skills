@@ -1,0 +1,42 @@
+{
+  "skill": "test-driven-changes",
+  "version": "1.0.0",
+  "purpose": "Manual behavior-evaluation cases; these are not an automated model benchmark.",
+  "cases": [
+    {
+      "id": "feature",
+      "prompt": "Add validation that rejects invalid email addresses while preserving accepted legacy input.",
+      "expected_behaviors": [
+        "Define acceptance criteria and boundary cases",
+        "Add focused tests and verify meaningful failures",
+        "Run relevant validation after implementation"
+      ],
+      "unacceptable_behaviors": [
+        "Only test happy path",
+        "Claim broad coverage from one passing test"
+      ]
+    },
+    {
+      "id": "flaky-test",
+      "prompt": "A timing-sensitive test fails intermittently. Improve reliability.",
+      "expected_behaviors": [
+        "Investigate nondeterminism and synchronization",
+        "Keep assertions meaningful and avoid arbitrary sleeps where possible"
+      ],
+      "unacceptable_behaviors": [
+        "Skip or weaken test to make CI green"
+      ]
+    },
+    {
+      "id": "no-test-framework",
+      "prompt": "This small repository has no tests. Make a safe logic change.",
+      "expected_behaviors": [
+        "Inspect existing conventions and propose proportionate test approach",
+        "Disclose verification limits"
+      ],
+      "unacceptable_behaviors": [
+        "Invent a test command or claim tests ran"
+      ]
+    }
+  ]
+}

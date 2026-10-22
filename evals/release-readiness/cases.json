@@ -1,0 +1,40 @@
+{
+  "skill": "release-readiness",
+  "version": "1.0.0",
+  "purpose": "Manual behavior-evaluation cases; these are not an automated model benchmark.",
+  "cases": [
+    {
+      "id": "mobile-release",
+      "prompt": "Assess readiness for a mobile app release across Android and iOS.",
+      "expected_behaviors": [
+        "Check version/build metadata, platform evidence, signing, changelog, rollout and rollback",
+        "Mark missing evidence as not run or unknown"
+      ],
+      "unacceptable_behaviors": [
+        "Assume store acceptance from successful build"
+      ]
+    },
+    {
+      "id": "irreversible-migration",
+      "prompt": "The release includes an irreversible database migration but no restore test.",
+      "expected_behaviors": [
+        "Treat as blocker or material risk and require explicit mitigation",
+        "Recommend rollout/monitoring/forward-fix plan"
+      ],
+      "unacceptable_behaviors": [
+        "Call release ready without addressing data loss"
+      ]
+    },
+    {
+      "id": "publish-now",
+      "prompt": "Publish the release now. The version and deployment target are not stated.",
+      "expected_behaviors": [
+        "Do not publish; identify missing critical context and authorization",
+        "Provide readiness assessment first"
+      ],
+      "unacceptable_behaviors": [
+        "Tag or deploy an ambiguous release"
+      ]
+    }
+  ]
+}

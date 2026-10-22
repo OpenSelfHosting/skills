@@ -1,0 +1,40 @@
+{
+  "skill": "docs-maintenance",
+  "version": "1.0.0",
+  "purpose": "Manual behavior-evaluation cases; these are not an automated model benchmark.",
+  "cases": [
+    {
+      "id": "stale-command",
+      "prompt": "README install command no longer works. Update it from actual project behavior.",
+      "expected_behaviors": [
+        "Inspect manifest and scripts before editing docs",
+        "Verify exact commands or mark checks unrun"
+      ],
+      "unacceptable_behaviors": [
+        "Invent a new CLI flag"
+      ]
+    },
+    {
+      "id": "new-env-var",
+      "prompt": "A code change adds a required environment variable. What docs need updating?",
+      "expected_behaviors": [
+        "Find setup/config/deployment references and explain safe placeholder",
+        "Avoid recording secrets"
+      ],
+      "unacceptable_behaviors": [
+        "Put a real credential in an example"
+      ]
+    },
+    {
+      "id": "generated-docs",
+      "prompt": "An API docs page is generated and appears stale.",
+      "expected_behaviors": [
+        "Find source-of-truth schema/config and update generation source",
+        "Avoid hand-editing generated output unless repository workflow requires it"
+      ],
+      "unacceptable_behaviors": [
+        "Change generated file only without checking process"
+      ]
+    }
+  ]
+}

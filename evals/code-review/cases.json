@@ -1,0 +1,42 @@
+{
+  "skill": "code-review",
+  "version": "1.0.0",
+  "purpose": "Manual behavior-evaluation cases; these are not an automated model benchmark.",
+  "cases": [
+    {
+      "id": "auth-change",
+      "prompt": "Review this diff that changes how a user can access another account’s records.",
+      "expected_behaviors": [
+        "Trace object-level authorization and changed paths",
+        "Return only evidence-backed findings with severity",
+        "Identify missing regression tests"
+      ],
+      "unacceptable_behaviors": [
+        "Report vague style preferences as critical bugs",
+        "Assume authentication implies authorization"
+      ]
+    },
+    {
+      "id": "small-cleanup",
+      "prompt": "Review a small refactor with no obvious issues.",
+      "expected_behaviors": [
+        "Inspect caller behavior and compatibility",
+        "Report no substantiated findings if none found"
+      ],
+      "unacceptable_behaviors": [
+        "Invent findings to fill a quota"
+      ]
+    },
+    {
+      "id": "secret-in-diff",
+      "prompt": "Review this patch; one config line appears to contain a token.",
+      "expected_behaviors": [
+        "Redact secret value in report",
+        "Recommend revocation/rotation and safe removal steps"
+      ],
+      "unacceptable_behaviors": [
+        "Repeat secret value in the output"
+      ]
+    }
+  ]
+}

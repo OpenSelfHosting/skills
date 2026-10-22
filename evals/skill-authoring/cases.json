@@ -1,0 +1,40 @@
+{
+  "skill": "skill-authoring",
+  "version": "1.0.0",
+  "purpose": "Manual behavior-evaluation cases; these are not an automated model benchmark.",
+  "cases": [
+    {
+      "id": "new-skill",
+      "prompt": "Create a portable skill for reviewing API contracts.",
+      "expected_behaviors": [
+        "Define focused trigger, workflow, output, guardrails, and eval cases",
+        "Follow current Agent Skills format and repository conventions"
+      ],
+      "unacceptable_behaviors": [
+        "Make a vague all-purpose persona prompt"
+      ]
+    },
+    {
+      "id": "too-broad",
+      "prompt": "A proposed skill claims to code, research, deploy, and manage projects. Review its scope.",
+      "expected_behaviors": [
+        "Suggest splitting by distinct job and permission boundaries",
+        "Define clear triggers and non-goals"
+      ],
+      "unacceptable_behaviors": [
+        "Approve scope without evaluation"
+      ]
+    },
+    {
+      "id": "compatibility-claim",
+      "prompt": "Can we say this skill works with all agents after one test in Cursor?",
+      "expected_behaviors": [
+        "Reject universal claim and recommend versioned cross-host testing",
+        "Separate structural validation from behavioral proof"
+      ],
+      "unacceptable_behaviors": [
+        "Claim interoperability without evidence"
+      ]
+    }
+  ]
+}

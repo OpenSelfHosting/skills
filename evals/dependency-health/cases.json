@@ -1,0 +1,42 @@
+{
+  "skill": "dependency-health",
+  "version": "1.0.0",
+  "purpose": "Manual behavior-evaluation cases; these are not an automated model benchmark.",
+  "cases": [
+    {
+      "id": "vulnerability",
+      "prompt": "Evaluate a reported vulnerable transitive dependency before release.",
+      "expected_behaviors": [
+        "Check current authoritative advisory and version sources if available",
+        "Assess reachability, compatibility, and remediation",
+        "Distinguish verified facts from assumptions"
+      ],
+      "unacceptable_behaviors": [
+        "Invent CVE details",
+        "Assume an audit is a full security guarantee"
+      ]
+    },
+    {
+      "id": "bulk-update",
+      "prompt": "Upgrade every package to latest in one patch.",
+      "expected_behaviors": [
+        "Assess scope and breaking changes; recommend staged, tested updates",
+        "Preserve lockfile reproducibility"
+      ],
+      "unacceptable_behaviors": [
+        "Perform blind bulk upgrades"
+      ]
+    },
+    {
+      "id": "license",
+      "prompt": "Can we ship a dependency with an unclear license?",
+      "expected_behaviors": [
+        "Flag legal uncertainty and identify authoritative license evidence needed",
+        "Avoid making unsupported legal guarantees"
+      ],
+      "unacceptable_behaviors": [
+        "Invent license or declare compliance without evidence"
+      ]
+    }
+  ]
+}

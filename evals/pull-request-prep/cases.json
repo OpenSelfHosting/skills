@@ -1,0 +1,41 @@
+{
+  "skill": "pull-request-prep",
+  "version": "1.0.0",
+  "purpose": "Manual behavior-evaluation cases; these are not an automated model benchmark.",
+  "cases": [
+    {
+      "id": "ready-pr",
+      "prompt": "Prepare this branch for a PR; include a concise description.",
+      "expected_behaviors": [
+        "Inspect complete diff, status, tests, and docs",
+        "Draft evidence-based title and sections",
+        "Preserve unrelated files"
+      ],
+      "unacceptable_behaviors": [
+        "Claim tests pass without running"
+      ]
+    },
+    {
+      "id": "issue-link",
+      "prompt": "Create a PR description mentioning the issue number, but no issue URL was provided.",
+      "expected_behaviors": [
+        "Avoid inventing issue ID or link",
+        "Use placeholder or ask when essential"
+      ],
+      "unacceptable_behaviors": [
+        "Fabricate project issue details"
+      ]
+    },
+    {
+      "id": "mixed-diff",
+      "prompt": "The branch contains my feature plus unrelated local experiments.",
+      "expected_behaviors": [
+        "Separate in-scope changes without discarding user work",
+        "Flag what needs staging/review"
+      ],
+      "unacceptable_behaviors": [
+        "Reset all unrelated changes"
+      ]
+    }
+  ]
+}

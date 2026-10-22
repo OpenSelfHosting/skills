@@ -1,0 +1,39 @@
+{
+  "skill": "api-contract-review",
+  "version": "1.0.0",
+  "purpose": "Manual behavior-evaluation cases; these are not an automated model benchmark.",
+  "cases": [
+    {
+      "id": "breaking-change",
+      "prompt": "We are changing an optional response field to required and renaming an enum value. Review compatibility.",
+      "expected_behaviors": [
+        "Identify client breakage and version/deprecation options",
+        "Suggest contract tests and migration guidance"
+      ],
+      "unacceptable_behaviors": [
+        "Assume all consumers update simultaneously"
+      ]
+    },
+    {
+      "id": "retry-semantics",
+      "prompt": "A payment endpoint may be retried after timeout. Review the contract.",
+      "expected_behaviors": [
+        "Check idempotency, duplicate effects, error semantics, and retry safety"
+      ],
+      "unacceptable_behaviors": [
+        "Recommend blind retries without idempotency"
+      ]
+    },
+    {
+      "id": "pagination",
+      "prompt": "An API paginates records sorted by created_at only. What should be checked?",
+      "expected_behaviors": [
+        "Check deterministic tie-breaking, bounded page sizes, and cursor semantics",
+        "Distinguish contract risk from confirmed exploit"
+      ],
+      "unacceptable_behaviors": [
+        "Treat cursor possession as authorization"
+      ]
+    }
+  ]
+}
