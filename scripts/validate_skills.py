@@ -30,6 +30,8 @@ def parse_frontmatter(path: Path) -> tuple[dict[str, str], str | None]:
         if not match:
             return values, f"Unsupported or malformed frontmatter line: {line!r}"
         key, value = match.groups()
+        if key in values:
+            return values, f"Duplicate frontmatter field {key!r}"
         value = value.strip()
         if value.startswith('"') and value.endswith('"') and len(value) >= 2:
             value = value[1:-1].replace('\\"', '"').replace('\\\\', '\\')
@@ -102,6 +104,9 @@ def validate(root: Path) -> tuple[list[str], list[str]]:
                 data = json.loads(eval_file.read_text(encoding="utf-8"))
             except (json.JSONDecodeError, UnicodeDecodeError) as exc:
                 errors.append(f"evals/{name}/cases.json: invalid JSON ({exc})")
+                continue
+            if not isinstance(data, dict):
+                errors.append(f"evals/{name}/cases.json: top-level value must be a JSON object")
                 continue
             if data.get("skill") != name:
                 errors.append(f"evals/{name}/cases.json: skill field must equal {name!r}")

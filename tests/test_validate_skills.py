@@ -28,6 +28,17 @@ class FrontmatterTests(unittest.TestCase):
             _, error = parse_frontmatter(path)
             self.assertIsNotNone(error)
 
+    def test_rejects_duplicate_fields(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "SKILL.md"
+            path.write_text(
+                '---\nname: first-name\nname: second-name\n'
+                'description: "A useful skill description longer than thirty chars."\n---\n',
+                encoding="utf-8",
+            )
+            _, error = parse_frontmatter(path)
+            self.assertEqual(error, "Duplicate frontmatter field 'name'")
+
 
 class RepositoryValidationTests(unittest.TestCase):
     def test_project_repository_passes_structural_validation(self):
@@ -63,6 +74,29 @@ class RepositoryValidationTests(unittest.TestCase):
             (root / "README.md").write_text("skills/link-check/SKILL.md", encoding="utf-8")
             errors, _warnings = validate(root)
             self.assertTrue(any("broken relative link" in item for item in errors))
+
+    def test_reports_non_object_evaluation_document(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            skill_dir = root / "skills" / "invalid-eval"
+            skill_dir.mkdir(parents=True)
+            (skill_dir / "SKILL.md").write_text(
+                '---\nname: invalid-eval\n'
+                'description: "A focused description that satisfies validation limits."\n'
+                '---\n# Example\n',
+                encoding="utf-8",
+            )
+            eval_dir = root / "evals" / "invalid-eval"
+            eval_dir.mkdir(parents=True)
+            (eval_dir / "cases.json").write_text("[]", encoding="utf-8")
+            (root / "README.md").write_text("skills/invalid-eval/SKILL.md", encoding="utf-8")
+
+            errors, _warnings = validate(root)
+
+            self.assertIn(
+                "evals/invalid-eval/cases.json: top-level value must be a JSON object",
+                errors,
+            )
 
 
 if __name__ == "__main__":
